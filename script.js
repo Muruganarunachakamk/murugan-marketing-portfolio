@@ -1,15 +1,49 @@
 const themeToggleBtn = document.getElementById('theme-toggle');
 const htmlElement = document.body;
+const rootStyle = document.documentElement.style;
 const themeIcon = themeToggleBtn.querySelector('i');
 
+// Determine the effective starting theme from system preference (no theme forced by default).
+const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+themeIcon.classList.remove('fa-moon', 'fa-sun');
+themeIcon.classList.add(systemPrefersLight ? 'fa-sun' : 'fa-moon');
+
+function randomAccentPalette() {
+    // Pick a fully random hue each time dark mode is (re)entered, derive a coherent triad from it.
+    const hue = Math.floor(Math.random() * 360);
+    const accent = `hsl(${hue}, 82%, 62%)`;
+    const light = `hsl(${hue}, 88%, 72%)`;
+    const secondaryHue = (hue + 40) % 360;
+    const secondary = `hsl(${secondaryHue}, 85%, 60%)`;
+    const glow = `hsla(${hue}, 82%, 62%, 0.18)`;
+
+    rootStyle.setProperty('--accent-blue', accent);
+    rootStyle.setProperty('--accent-light', light);
+    rootStyle.setProperty('--accent-secondary', secondary);
+    rootStyle.setProperty('--accent-glow', glow);
+    rootStyle.setProperty('--mesh-1', `radial-gradient(ellipse 900px 700px at 8% -10%, hsla(${hue}, 82%, 62%, 0.16), transparent 60%)`);
+    rootStyle.setProperty('--mesh-2', `radial-gradient(ellipse 800px 800px at 95% 15%, hsla(${secondaryHue}, 85%, 60%, 0.12), transparent 55%)`);
+    rootStyle.setProperty('--mesh-3', `radial-gradient(ellipse 1000px 900px at 50% 110%, hsla(${(hue + 260) % 360}, 70%, 60%, 0.14), transparent 60%)`);
+}
+
+function clearAccentOverrides() {
+    ['--accent-blue', '--accent-light', '--accent-secondary', '--accent-glow', '--mesh-1', '--mesh-2', '--mesh-3']
+        .forEach(prop => rootStyle.removeProperty(prop));
+}
+
+let effectiveTheme = systemPrefersLight ? 'light' : 'dark';
+
 themeToggleBtn.addEventListener('click', () => {
-    const currentTheme = htmlElement.getAttribute('data-theme');
-    if (currentTheme === 'dark') {
+    if (effectiveTheme === 'dark') {
+        effectiveTheme = 'light';
         htmlElement.setAttribute('data-theme', 'light');
+        clearAccentOverrides();
         themeIcon.classList.remove('fa-moon');
         themeIcon.classList.add('fa-sun');
     } else {
+        effectiveTheme = 'dark';
         htmlElement.setAttribute('data-theme', 'dark');
+        randomAccentPalette();
         themeIcon.classList.remove('fa-sun');
         themeIcon.classList.add('fa-moon');
     }
@@ -150,6 +184,30 @@ if (downloadBtn) {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    });
+}
+
+
+/* Magnetic "connect" button: subtly follows the cursor within its hover radius */
+const magneticBtn = document.getElementById('magnetic-connect');
+if (magneticBtn) {
+    const inner = magneticBtn.querySelector('.magnetic-btn-inner');
+    const strength = 18;
+
+    magneticBtn.addEventListener('mousemove', (e) => {
+        const rect = magneticBtn.getBoundingClientRect();
+        const relX = e.clientX - (rect.left + rect.width / 2);
+        const relY = e.clientY - (rect.top + rect.height / 2);
+        inner.style.transform = `translate(${relX / rect.width * strength}px, ${relY / rect.height * strength}px)`;
+    });
+
+    magneticBtn.addEventListener('mouseleave', () => {
+        inner.style.transform = 'translate(0, 0)';
+    });
+
+    magneticBtn.addEventListener('click', () => {
+        const contact = document.getElementById('contact');
+        if (contact) contact.scrollIntoView({ behavior: 'smooth' });
     });
 }
 
