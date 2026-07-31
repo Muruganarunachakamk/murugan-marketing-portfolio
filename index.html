@@ -11,6 +11,57 @@
 <body>
 
 <div id="mouse-glow"></div>
+<div class="custom-cursor" id="custom-cursor"></div>
+
+<div class="watermark-layer" aria-hidden="true">
+    <svg class="watermark-dark" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="1">
+            <line x1="120" y1="140" x2="260" y2="90"/>
+            <line x1="260" y1="90" x2="380" y2="180"/>
+            <line x1="380" y1="180" x2="520" y2="70"/>
+            <line x1="900" y1="220" x2="1020" y2="140"/>
+            <line x1="1020" y1="140" x2="1180" y2="210"/>
+            <line x1="1180" y1="210" x2="1300" y2="120"/>
+            <line x1="200" y1="620" x2="330" y2="700"/>
+            <line x1="330" y1="700" x2="470" y2="640"/>
+            <line x1="1080" y1="640" x2="1220" y2="720"/>
+            <line x1="1220" y1="720" x2="1360" y2="660"/>
+        </g>
+        <g fill="rgba(255,255,255,0.55)">
+            <circle cx="120" cy="140" r="2"/>
+            <circle cx="260" cy="90" r="2.4"/>
+            <circle cx="380" cy="180" r="1.8"/>
+            <circle cx="520" cy="70" r="2"/>
+            <circle cx="900" cy="220" r="2"/>
+            <circle cx="1020" cy="140" r="2.6"/>
+            <circle cx="1180" cy="210" r="1.8"/>
+            <circle cx="1300" cy="120" r="2.2"/>
+            <circle cx="200" cy="620" r="2"/>
+            <circle cx="330" cy="700" r="2.4"/>
+            <circle cx="470" cy="640" r="1.8"/>
+            <circle cx="1080" cy="640" r="2"/>
+            <circle cx="1220" cy="720" r="2.6"/>
+            <circle cx="1360" cy="660" r="1.8"/>
+            <circle cx="60" cy="400" r="1.4"/>
+            <circle cx="720" cy="60" r="1.4"/>
+            <circle cx="1450" cy="400" r="1.4"/>
+            <circle cx="800" cy="850" r="1.4"/>
+            <circle cx="150" cy="820" r="1.2"/>
+            <circle cx="1500" cy="780" r="1.6"/>
+        </g>
+    </svg>
+    <svg class="watermark-light" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="rgba(219,39,119,0.10)" stroke-width="1.5">
+            <circle cx="220" cy="160" r="60"/>
+            <circle cx="220" cy="160" r="100"/>
+            <circle cx="220" cy="160" r="140"/>
+            <circle cx="1360" cy="200" r="50"/>
+            <circle cx="1360" cy="200" r="90"/>
+            <path d="M 900 780 Q 1000 680 1120 720 T 1320 640" stroke="rgba(234,88,12,0.12)"/>
+            <path d="M 80 700 L 220 560 L 340 620 L 480 460" stroke="rgba(219,39,119,0.10)"/>
+        </g>
+    </svg>
+</div>
 
 <nav class="glass-nav">
     <div class="nav-container">
@@ -62,7 +113,7 @@
         <div class="hero-stats">
             <div class="stat-card glass-card">
                 <div class="stat-icon"><i class="fas fa-chart-pie"></i></div>
-                <div class="stat-value counter" data-target="8.00">0.00</div>
+                <div class="stat-value counter" data-target="7.58">0.00</div>
                 <div class="stat-label">MBA GPA (Term I)</div>
             </div>
             <div class="stat-card glass-card">
@@ -91,7 +142,7 @@
                     <div class="timeline-content">
                         <h3>Master of Business Administration (MBA) - Marketing</h3>
                         <h4>Amrita School of Business, Coimbatore</h4>
-                        <div class="kpi-tag">GPA (Term I): 8.00 / 10.00</div>
+                        <div class="kpi-tag">GPA (Term I): 7.58 / 10.00</div>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -478,10 +529,11 @@
     </section>
 </main>
 
-<div class="magnetic-btn" id="magnetic-connect">
+<div class="magnetic-btn" id="magnetic-connect" title="Email me directly">
     <span class="magnetic-btn-inner">
-        <i class="fas fa-paper-plane"></i>
+        <i class="fas fa-envelope"></i>
     </span>
+    <span class="magnetic-btn-label">Say hello</span>
 </div>
 
 <footer id="contact" class="dashboard-footer glass-panel">
