@@ -51,16 +51,30 @@ themeToggleBtn.addEventListener('click', () => {
 
 
 const mouseGlow = document.getElementById('mouse-glow');
+const customCursor = document.getElementById('custom-cursor');
 
 document.addEventListener('mousemove', (e) => {
     mouseGlow.style.left = e.clientX + 'px';
     mouseGlow.style.top = e.clientY + 'px';
     mouseGlow.style.opacity = '1';
+
+    if (customCursor) {
+        customCursor.style.left = e.clientX + 'px';
+        customCursor.style.top = e.clientY + 'px';
+    }
 });
 
 document.addEventListener('mouseleave', () => {
     mouseGlow.style.opacity = '0';
 });
+
+if (customCursor) {
+    const interactiveSelector = 'a, button, .cert-card, .interactive-card, .spec-parent, .spec-child-content, input, textarea';
+    document.querySelectorAll(interactiveSelector).forEach(el => {
+        el.addEventListener('mouseenter', () => customCursor.classList.add('is-active'));
+        el.addEventListener('mouseleave', () => customCursor.classList.remove('is-active'));
+    });
+}
 
 
 const typingText = document.getElementById('typing-text');
@@ -206,8 +220,7 @@ if (magneticBtn) {
     });
 
     magneticBtn.addEventListener('click', () => {
-        const contact = document.getElementById('contact');
-        if (contact) contact.scrollIntoView({ behavior: 'smooth' });
+        window.location.href = 'mailto:muruganarunachalamk@gmail.com?subject=Let%27s%20connect';
     });
 }
 
