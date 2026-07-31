@@ -23,39 +23,39 @@
 /* Default: follow system preference */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
-    --bg-main: #f7f5f2;
+    --bg-main: #f4faf9;
     --bg-secondary: #ffffff;
-    --text-main: #16131f;
-    --text-muted: #5b5770;
-    --accent-blue: #db2777;
-    --accent-light: #be185d;
-    --accent-secondary: #ea580c;
-    --accent-glow: rgba(219, 39, 119, 0.09);
-    --glass-bg: rgba(255, 255, 255, 0.55);
-    --glass-border: rgba(0, 0, 0, 0.07);
+    --text-main: #10242b;
+    --text-muted: #5c7078;
+    --accent-blue: #0891b2;
+    --accent-light: #0e7490;
+    --accent-secondary: #14b8a6;
+    --accent-glow: rgba(8, 145, 178, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(15, 118, 110, 0.1);
     --card-hover: rgba(255, 255, 255, 0.95);
-    --mesh-1: radial-gradient(ellipse 900px 700px at 8% -10%, rgba(219, 39, 119, 0.10), transparent 60%);
-    --mesh-2: radial-gradient(ellipse 800px 800px at 95% 15%, rgba(234, 88, 12, 0.08), transparent 55%);
-    --mesh-3: radial-gradient(ellipse 1000px 900px at 50% 110%, rgba(124, 58, 237, 0.08), transparent 60%);
+    --mesh-1: radial-gradient(ellipse 900px 700px at 8% -10%, rgba(8, 145, 178, 0.10), transparent 60%);
+    --mesh-2: radial-gradient(ellipse 800px 800px at 95% 15%, rgba(20, 184, 166, 0.09), transparent 55%);
+    --mesh-3: radial-gradient(ellipse 1000px 900px at 50% 110%, rgba(103, 232, 249, 0.10), transparent 60%);
   }
 }
 
 /* Explicit user override via toggle */
 [data-theme="light"] {
---bg-main: #f7f5f2;
+--bg-main: #f4faf9;
 --bg-secondary: #ffffff;
---text-main: #16131f;
---text-muted: #5b5770;
---accent-blue: #db2777;
---accent-light: #be185d;
---accent-secondary: #ea580c;
---accent-glow: rgba(219, 39, 119, 0.09);
---glass-bg: rgba(255, 255, 255, 0.55);
---glass-border: rgba(0, 0, 0, 0.07);
+--text-main: #10242b;
+--text-muted: #5c7078;
+--accent-blue: #0891b2;
+--accent-light: #0e7490;
+--accent-secondary: #14b8a6;
+--accent-glow: rgba(8, 145, 178, 0.08);
+--glass-bg: rgba(255, 255, 255, 0.6);
+--glass-border: rgba(15, 118, 110, 0.1);
 --card-hover: rgba(255, 255, 255, 0.95);
---mesh-1: radial-gradient(ellipse 900px 700px at 8% -10%, rgba(219, 39, 119, 0.10), transparent 60%);
---mesh-2: radial-gradient(ellipse 800px 800px at 95% 15%, rgba(234, 88, 12, 0.08), transparent 55%);
---mesh-3: radial-gradient(ellipse 1000px 900px at 50% 110%, rgba(124, 58, 237, 0.08), transparent 60%);
+--mesh-1: radial-gradient(ellipse 900px 700px at 8% -10%, rgba(8, 145, 178, 0.10), transparent 60%);
+--mesh-2: radial-gradient(ellipse 800px 800px at 95% 15%, rgba(20, 184, 166, 0.09), transparent 55%);
+--mesh-3: radial-gradient(ellipse 1000px 900px at 50% 110%, rgba(103, 232, 249, 0.10), transparent 60%);
 }
 
 [data-theme="dark"] {
@@ -351,7 +351,66 @@ gap: 2rem;
 display: flex;
 flex-direction: column;
 gap: 3rem;
-padding: 4rem 3rem;
+padding: 4.75rem 3rem 4rem;
+position: relative;
+overflow: hidden;
+}
+
+.hero-illustration {
+position: absolute;
+top: 0;
+right: 0;
+width: 62%;
+height: 100%;
+min-width: 480px;
+z-index: 0;
+pointer-events: none;
+opacity: 0.9;
+}
+
+[data-theme="light"] .hero-illustration,
+body:not([data-theme]):not(.js-dark) .hero-illustration {
+opacity: 0.55;
+}
+
+@media (prefers-color-scheme: light) {
+  body:not([data-theme]) .hero-illustration { opacity: 0.55; }
+}
+[data-theme="dark"] .hero-illustration { opacity: 0.9; }
+
+.hero-content, .hero-stats {
+position: relative;
+z-index: 1;
+}
+
+.flow-path {
+animation: flowDash 9s linear infinite;
+}
+.flow-path-delay {
+animation-delay: -3s;
+}
+@keyframes flowDash {
+to { stroke-dashoffset: -120; }
+}
+
+.pulse-node {
+animation: nodePulse 2.6s ease-in-out infinite;
+transform-origin: center;
+}
+.pulse-node-delay {
+animation-delay: -1.3s;
+}
+@keyframes nodePulse {
+0%, 100% { opacity: 0.5; r: 3.5; }
+50% { opacity: 1; r: 5; }
+}
+
+@media (max-width: 1024px) {
+  .hero-illustration { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-path, .pulse-node { animation: none; }
 }
 
 .hero-badge {
@@ -1215,10 +1274,10 @@ line-height: 1.4;
 /* Magnetic interactive connect button */
 .magnetic-btn {
 position: fixed;
-bottom: 2.5rem;
-right: 2.5rem;
-width: 64px;
-height: 64px;
+bottom: 2rem;
+right: 2rem;
+width: 56px;
+height: 56px;
 z-index: 900;
 cursor: pointer;
 }
@@ -1237,22 +1296,68 @@ height: 100%;
 border-radius: 50%;
 background: linear-gradient(135deg, var(--accent-blue), var(--accent-secondary));
 color: white;
-font-size: 1.3rem;
-box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+font-size: 1.15rem;
+box-shadow: 0 6px 18px rgba(236, 72, 153, 0.32);
 transition: transform 0.15s ease-out, box-shadow 0.3s ease;
 }
 
 .magnetic-btn:hover .magnetic-btn-inner {
-box-shadow: 0 10px 32px rgba(236, 72, 153, 0.55);
+box-shadow: 0 8px 24px rgba(236, 72, 153, 0.45);
 }
 
 .magnetic-btn:active .magnetic-btn-inner {
 transform: scale(0.92);
 }
 
+.magnetic-popup {
+position: absolute;
+bottom: 68px;
+right: 0;
+width: 250px;
+background: var(--bg-secondary);
+border: 1px solid var(--glass-border);
+border-radius: 12px;
+padding: 0.9rem 1.1rem;
+font-size: 0.82rem;
+color: var(--text-muted);
+line-height: 1.5;
+box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+opacity: 0;
+transform: translateY(8px);
+pointer-events: none;
+transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.magnetic-popup strong {
+color: var(--text-main);
+}
+
+.magnetic-popup.is-visible {
+opacity: 1;
+transform: translateY(0);
+pointer-events: auto;
+}
+
+.magnetic-popup-close {
+position: absolute;
+top: 6px;
+right: 8px;
+background: none;
+border: none;
+color: var(--text-muted);
+font-size: 1rem;
+cursor: pointer;
+line-height: 1;
+padding: 2px;
+}
+
+.magnetic-popup-close:hover {
+color: var(--text-main);
+}
+
 .magnetic-btn-label {
 position: absolute;
-right: 74px;
+right: 66px;
 top: 50%;
 transform: translateY(-50%) translateX(8px);
 background: var(--bg-secondary);
