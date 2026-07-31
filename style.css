@@ -9,26 +9,63 @@
 --accent-light: #f472b6;
 --accent-secondary: #f97316;
 --accent-glow: rgba(236, 72, 153, 0.18);
---glass-bg: rgba(255, 255, 255, 0.03);
---glass-border: rgba(255, 255, 255, 0.08);
---card-hover: rgba(255, 255, 255, 0.06);
+--glass-bg: rgba(255, 255, 255, 0.025);
+--glass-border: rgba(255, 255, 255, 0.09);
+--card-hover: rgba(255, 255, 255, 0.05);
 --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 --radius: 16px;
 --glow-size: 600px;
+--mesh-1: radial-gradient(ellipse 900px 700px at 8% -10%, rgba(236, 72, 153, 0.16), transparent 60%);
+--mesh-2: radial-gradient(ellipse 800px 800px at 95% 15%, rgba(249, 115, 22, 0.12), transparent 55%);
+--mesh-3: radial-gradient(ellipse 1000px 900px at 50% 110%, rgba(139, 92, 246, 0.14), transparent 60%);
 }
 
+/* Default: follow system preference */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg-main: #f7f5f2;
+    --bg-secondary: #ffffff;
+    --text-main: #16131f;
+    --text-muted: #5b5770;
+    --accent-blue: #db2777;
+    --accent-light: #be185d;
+    --accent-secondary: #ea580c;
+    --accent-glow: rgba(219, 39, 119, 0.09);
+    --glass-bg: rgba(255, 255, 255, 0.55);
+    --glass-border: rgba(0, 0, 0, 0.07);
+    --card-hover: rgba(255, 255, 255, 0.95);
+    --mesh-1: radial-gradient(ellipse 900px 700px at 8% -10%, rgba(219, 39, 119, 0.10), transparent 60%);
+    --mesh-2: radial-gradient(ellipse 800px 800px at 95% 15%, rgba(234, 88, 12, 0.08), transparent 55%);
+    --mesh-3: radial-gradient(ellipse 1000px 900px at 50% 110%, rgba(124, 58, 237, 0.08), transparent 60%);
+  }
+}
+
+/* Explicit user override via toggle */
 [data-theme="light"] {
---bg-main: #f7f5fb;
+--bg-main: #f7f5f2;
 --bg-secondary: #ffffff;
 --text-main: #16131f;
 --text-muted: #5b5770;
 --accent-blue: #db2777;
 --accent-light: #be185d;
 --accent-secondary: #ea580c;
---accent-glow: rgba(219, 39, 119, 0.1);
---glass-bg: rgba(255, 255, 255, 0.7);
---glass-border: rgba(0, 0, 0, 0.08);
---card-hover: rgba(255, 255, 255, 1);
+--accent-glow: rgba(219, 39, 119, 0.09);
+--glass-bg: rgba(255, 255, 255, 0.55);
+--glass-border: rgba(0, 0, 0, 0.07);
+--card-hover: rgba(255, 255, 255, 0.95);
+--mesh-1: radial-gradient(ellipse 900px 700px at 8% -10%, rgba(219, 39, 119, 0.10), transparent 60%);
+--mesh-2: radial-gradient(ellipse 800px 800px at 95% 15%, rgba(234, 88, 12, 0.08), transparent 55%);
+--mesh-3: radial-gradient(ellipse 1000px 900px at 50% 110%, rgba(124, 58, 237, 0.08), transparent 60%);
+}
+
+[data-theme="dark"] {
+--bg-main: #0c0916;
+--bg-secondary: #130f24;
+--text-main: #f8fafc;
+--text-muted: #a3a1b8;
+--glass-bg: rgba(255, 255, 255, 0.025);
+--glass-border: rgba(255, 255, 255, 0.09);
+--card-hover: rgba(255, 255, 255, 0.05);
 }
 
 {
@@ -44,10 +81,12 @@ scroll-behavior: smooth;
 body {
 font-family: 'Inter', sans-serif;
 background-color: var(--bg-main);
+background-image: var(--mesh-1), var(--mesh-2), var(--mesh-3);
+background-attachment: fixed;
 color: var(--text-main);
 line-height: 1.6;
 overflow-x: hidden;
-transition: background-color 0.3s ease, color 0.3s ease;
+transition: background-color 0.4s ease, color 0.4s ease, background-image 0.6s ease;
 }
 
 #mouse-glow {
@@ -205,8 +244,8 @@ gap: 2rem;
 
 .glass-panel {
 background: var(--glass-bg);
-backdrop-filter: blur(10px);
--webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
 border: 1px solid var(--glass-border);
 border-radius: var(--radius);
 padding: 2.5rem;
@@ -606,6 +645,36 @@ display: inline-block;
 width: 1rem;
 }
 
+.project-note {
+margin-top: 1.2rem;
+padding-top: 1rem;
+border-top: 1px dashed var(--glass-border);
+font-size: 0.85rem;
+color: var(--text-muted);
+font-style: italic;
+display: flex;
+align-items: flex-start;
+gap: 0.5rem;
+}
+
+.project-note i {
+color: var(--accent-secondary);
+margin-top: 0.2rem;
+}
+
+.tool-tag-status {
+color: var(--accent-secondary);
+border: 1px solid rgba(249, 115, 22, 0.3);
+font-weight: 600;
+}
+
+.section-subtext {
+font-size: 0.9rem;
+color: var(--text-muted);
+margin-top: -1.2rem;
+margin-bottom: 1.5rem;
+}
+
 /* Leadership */
 .leadership-content h3 {
 font-size: 1.1rem;
@@ -815,8 +884,8 @@ margin-bottom: 2rem;
 
 .cert-card {
 background: var(--glass-bg);
-backdrop-filter: blur(10px);
--webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(3px);
+-webkit-backdrop-filter: blur(3px);
 border: 1px solid var(--glass-border);
 border-radius: 12px;
 padding: 1.5rem;
@@ -1082,6 +1151,48 @@ font-weight: 600;
 color: var(--text-main);
 margin-bottom: 0.5rem;
 line-height: 1.4;
+}
+
+/* Magnetic interactive connect button */
+.magnetic-btn {
+position: fixed;
+bottom: 2.5rem;
+right: 2.5rem;
+width: 64px;
+height: 64px;
+z-index: 900;
+cursor: pointer;
+}
+
+.magnetic-btn-inner {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+height: 100%;
+border-radius: 50%;
+background: linear-gradient(135deg, var(--accent-blue), var(--accent-secondary));
+color: white;
+font-size: 1.3rem;
+box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+}
+
+.magnetic-btn:hover .magnetic-btn-inner {
+box-shadow: 0 10px 32px rgba(236, 72, 153, 0.55);
+}
+
+.magnetic-btn:active .magnetic-btn-inner {
+transform: scale(0.92);
+}
+
+@media (max-width: 768px) {
+.magnetic-btn {
+bottom: 1.5rem;
+right: 1.5rem;
+width: 54px;
+height: 54px;
+}
 }
 
 /* Responsive Design */
