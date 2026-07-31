@@ -219,10 +219,34 @@ if (magneticBtn) {
         inner.style.transform = 'translate(0, 0)';
     });
 
-    magneticBtn.addEventListener('click', () => {
+    magneticBtn.addEventListener('click', (e) => {
+        if (e.target.closest('.magnetic-popup')) return;
         window.location.href = 'mailto:muruganarunachalamk@gmail.com?subject=Let%27s%20connect';
     });
 }
+
+/* Greeting popup: appears once after a short delay, auto-collapses, dismissible */
+const magneticPopup = document.getElementById('magnetic-popup');
+const magneticPopupClose = document.getElementById('magnetic-popup-close');
+if (magneticPopup) {
+    const showDelay = 1800;
+    const autoHideAfter = 6500;
+    let hideTimer;
+
+    setTimeout(() => {
+        magneticPopup.classList.add('is-visible');
+        hideTimer = setTimeout(() => {
+            magneticPopup.classList.remove('is-visible');
+        }, autoHideAfter);
+    }, showDelay);
+
+    if (magneticPopupClose) {
+        magneticPopupClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            clearTimeout(hideTimer);
+            magneticPopup.classList.remove('is-visible');
+        });
+    }
 
 
 /* Specialization hierarchy: expandable parent -> nested child certificates */
