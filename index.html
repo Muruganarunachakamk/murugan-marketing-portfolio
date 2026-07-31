@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body data-theme="dark">
+<body>
 
 <div id="mouse-glow"></div>
 
@@ -19,10 +19,10 @@
         </div>
         <ul class="nav-links">
             <li><a href="#education">Education</a></li>
-            <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Research</a></li>
-            <li><a href="#skills">Skills</a></li>
             <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
         </ul>
         <div class="nav-actions">
             <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">
@@ -184,40 +184,6 @@
         </section>
     </div>
 
-    <section id="experience" class="dashboard-section glass-panel">
-        <div class="section-header">
-            <h2><i class="fas fa-briefcase"></i> Experience</h2>
-        </div>
-        <div class="experience-grid">
-            <div class="interactive-card glass-card">
-                <div class="exp-header">
-                    <div class="exp-title-group">
-                        <h3>Finance Intern</h3>
-                        <h4>VSS Textile Private Limited</h4>
-                    </div>
-                    <div class="exp-date">2026</div>
-                </div>
-                <ul class="exp-details">
-                    <li><i class="fas fa-circle"></i> Performed GST reconciliation and Input Tax Credit (ITC) verification to support regulatory compliance.</li>
-                    <li><i class="fas fa-circle"></i> Reconciled ERP-Tally transactions, gaining working exposure to ERP workflows and export documentation.</li>
-                </ul>
-            </div>
-            <div class="interactive-card glass-card">
-                <div class="exp-header">
-                    <div class="exp-title-group">
-                        <h3>Audit Intern</h3>
-                        <h4>NVP & Co., Chartered Accountants</h4>
-                    </div>
-                    <div class="exp-date">2022</div>
-                </div>
-                <ul class="exp-details">
-                    <li><i class="fas fa-circle"></i> Assisted with bank reconciliation and accounting entries as part of statutory audit engagements.</li>
-                    <li><i class="fas fa-circle"></i> Prepared GST compliance documentation and supported client tax filings.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
     <section id="projects" class="dashboard-section glass-panel">
         <div class="section-header">
             <h2><i class="fas fa-flask"></i> Academic Research</h2>
@@ -246,12 +212,14 @@
                 <div class="project-tools">
                     <span class="tool-tag">Literature Review</span>
                     <span class="tool-tag">Amrita School of Business</span>
+                    <span class="tool-tag tool-tag-status">In Progress</span>
                 </div>
                 <ul class="project-bullets">
                     <li>Conducting a systematic review of academic literature on consumer skepticism, anthropomorphism, trust, and AI-based customer support in digital commerce.</li>
                     <li>Analyzing peer-reviewed journal articles to identify research gaps and theoretical perspectives relevant to the research problem.</li>
                     <li>Synthesizing insights from existing studies to support research problem formulation for subsequent project phases.</li>
                 </ul>
+                <p class="project-note"><i class="fas fa-flag-checkered"></i> Next phase: primary data collection and hypothesis testing on AI-chatbot trust formation.</p>
             </div>
         </div>
     </section>
@@ -282,7 +250,7 @@
                     </div>
                     <div class="cert-card-actions">
                         <a href="https://app-na2.hubspot.com/academy/achievements/7njfr9cq/en/1/murugan-arunachalam-k/digital-marketing" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-shield-alt"></i> Verify</a>
-                        <a href="https://github.com/Muruganarunachakamk/murugan-marketing-portfolio/blob/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Hubspot%20Digital%20Marketing%20Certificate.png" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-image"></i> View Certificate</a>
+                        <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Hubspot%20Digital%20Marketing%20Certificate.png" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-image"></i> View Certificate</a>
                     </div>
                 </div>
 
@@ -303,30 +271,43 @@
                     </div>
                     <div class="cert-card-actions">
                         <a href="https://www.credly.com/badges/81bfecf8-af87-44fe-8881-53149700ee85/linked_in_profile" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-shield-alt"></i> Verify</a>
-                        <a href="https://github.com/Muruganarunachakamk/murugan-marketing-portfolio/blob/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Excel%202019%20Associate%20(8).pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View Certificate</a>
+                        <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Excel%202019%20Associate%20(8).pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View Certificate</a>
                     </div>
                 </div>
 
-                <!-- TODO: Add NPTEL certificate files & permalinks for "Consumer Psychology" and "Managing Change in Organizations" (listed on resume, files not provided) -->
-                <div class="cert-card cert-card-todo">
+                <div class="cert-card">
                     <div class="cert-card-top">
                         <div class="cert-org-badge">NPTEL / IIT</div>
-                        <span class="cert-verify-badge cert-todo-badge"><i class="fas fa-hourglass-half"></i> Awaiting file</span>
+                        <span class="cert-verify-badge"><i class="fas fa-check-circle"></i> Verified</span>
                     </div>
                     <h3 class="cert-card-title">Consumer Psychology</h3>
                     <div class="cert-card-meta">
-                        <span><i class="fas fa-info-circle"></i> TODO: add certificate file & credential link</span>
+                        <span><i class="fas fa-university"></i> NPTEL Online Certification</span>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="tool-tag">Consumer Behaviour</span>
+                        <span class="tool-tag">Psychology</span>
+                    </div>
+                    <div class="cert-card-actions">
+                        <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/8b07576396a20678378f134cf33889c20cb2c59e/WhatsApp%20Image%202026-07-31%20at%204.17.07%20PM.jpeg" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-image"></i> View Certificate</a>
                     </div>
                 </div>
 
-                <div class="cert-card cert-card-todo">
+                <div class="cert-card">
                     <div class="cert-card-top">
                         <div class="cert-org-badge">NPTEL / IIT</div>
-                        <span class="cert-verify-badge cert-todo-badge"><i class="fas fa-hourglass-half"></i> Awaiting file</span>
+                        <span class="cert-verify-badge"><i class="fas fa-check-circle"></i> Verified</span>
                     </div>
                     <h3 class="cert-card-title">Managing Change in Organizations</h3>
                     <div class="cert-card-meta">
-                        <span><i class="fas fa-info-circle"></i> TODO: add certificate file & credential link</span>
+                        <span><i class="fas fa-university"></i> NPTEL Online Certification</span>
+                    </div>
+                    <div class="cert-skills">
+                        <span class="tool-tag">Organizational Behaviour</span>
+                        <span class="tool-tag">Change Management</span>
+                    </div>
+                    <div class="cert-card-actions">
+                        <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/8b07576396a20678378f134cf33889c20cb2c59e/WhatsApp%20Image%202026-07-31%20at%204.17.06%20PM.jpeg" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-image"></i> View Certificate</a>
                     </div>
                 </div>
 
@@ -348,7 +329,7 @@
                     </div>
                     <div class="spec-parent-right">
                         <a href="https://www.coursera.org/account/accomplishments/specialization/HCMYUYBKZ9OO" target="_blank" class="btn btn-outline btn-sm" onclick="event.stopPropagation()"><i class="fas fa-shield-alt"></i> Verify</a>
-                        <a href="https://github.com/Muruganarunachakamk/murugan-marketing-portfolio/blob/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Specialisation.pdf" target="_blank" class="btn btn-primary btn-sm" onclick="event.stopPropagation()"><i class="fas fa-file-pdf"></i> View Certificate</a>
+                        <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Specialisation.pdf" target="_blank" class="btn btn-primary btn-sm" onclick="event.stopPropagation()"><i class="fas fa-file-pdf"></i> View Certificate</a>
                         <i class="fas fa-chevron-down spec-chevron" aria-hidden="true"></i>
                     </div>
                 </button>
@@ -366,7 +347,7 @@
                             <div class="cert-card-meta"><span><i class="fas fa-calendar-alt"></i> May 1, 2026</span></div>
                             <div class="cert-card-actions">
                                 <a href="https://www.coursera.org/account/accomplishments/verify/FCEZ1K4L8KL3" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-shield-alt"></i> Verify</a>
-                                <a href="https://github.com/Muruganarunachakamk/murugan-marketing-portfolio/blob/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Introduction%20to%20Gen%20AI.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View</a>
+                                <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Introduction%20to%20Gen%20AI.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View</a>
                             </div>
                         </div>
                     </div>
@@ -381,7 +362,7 @@
                             <div class="cert-card-meta"><span><i class="fas fa-calendar-alt"></i> May 20, 2026</span></div>
                             <div class="cert-card-actions">
                                 <a href="https://www.coursera.org/account/accomplishments/verify/BJL1RKJOKXI1" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-shield-alt"></i> Verify</a>
-                                <a href="https://github.com/Muruganarunachakamk/murugan-marketing-portfolio/blob/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Prompt%20Engineering%20Basics.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View</a>
+                                <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Prompt%20Engineering%20Basics.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View</a>
                             </div>
                         </div>
                     </div>
@@ -396,7 +377,7 @@
                             <div class="cert-card-meta"><span><i class="fas fa-calendar-alt"></i> May 16, 2026</span></div>
                             <div class="cert-card-actions">
                                 <a href="https://www.coursera.org/account/accomplishments/verify/WIF4YNVK9Q54" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-shield-alt"></i> Verify</a>
-                                <a href="https://github.com/Muruganarunachakamk/murugan-marketing-portfolio/blob/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Generative%20AI%20%20Accelerate%20your%20Digital%20Marketing%20Career.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View</a>
+                                <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Generative%20AI%20%20Accelerate%20your%20Digital%20Marketing%20Career.pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View</a>
                             </div>
                         </div>
                     </div>
@@ -411,7 +392,7 @@
                             <div class="cert-card-meta"><span><i class="fas fa-calendar-alt"></i> May 19, 2026</span></div>
                             <div class="cert-card-actions">
                                 <a href="https://www.coursera.org/account/accomplishments/verify/ONF8MNWH78RF" target="_blank" class="btn btn-outline btn-sm"><i class="fas fa-shield-alt"></i> Verify</a>
-                                <a href="https://github.com/Muruganarunachakamk/murugan-marketing-portfolio/blob/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20AI%20SEO%20%20Mastering%20Generative%20Engine%20Optimization%20(GEO).pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View</a>
+                                <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20AI%20SEO%20%20Mastering%20Generative%20Engine%20Optimization%20(GEO).pdf" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-file-pdf"></i> View</a>
                             </div>
                         </div>
                     </div>
@@ -460,7 +441,48 @@
             </div>
         </section>
     </div>
+
+    <section id="experience" class="dashboard-section glass-panel">
+        <div class="section-header">
+            <h2><i class="fas fa-briefcase"></i> Prior Experience</h2>
+        </div>
+        <p class="section-subtext">Early finance internships that built the analytical foundation behind my marketing research.</p>
+        <div class="experience-grid">
+            <div class="interactive-card glass-card">
+                <div class="exp-header">
+                    <div class="exp-title-group">
+                        <h3>Finance Intern</h3>
+                        <h4>VSS Textile Private Limited</h4>
+                    </div>
+                    <div class="exp-date">2026</div>
+                </div>
+                <ul class="exp-details">
+                    <li><i class="fas fa-circle"></i> Performed GST reconciliation and Input Tax Credit (ITC) verification to support regulatory compliance.</li>
+                    <li><i class="fas fa-circle"></i> Reconciled ERP-Tally transactions, gaining working exposure to ERP workflows and export documentation.</li>
+                </ul>
+            </div>
+            <div class="interactive-card glass-card">
+                <div class="exp-header">
+                    <div class="exp-title-group">
+                        <h3>Audit Intern</h3>
+                        <h4>NVP & Co., Chartered Accountants</h4>
+                    </div>
+                    <div class="exp-date">2022</div>
+                </div>
+                <ul class="exp-details">
+                    <li><i class="fas fa-circle"></i> Assisted with bank reconciliation and accounting entries as part of statutory audit engagements.</li>
+                    <li><i class="fas fa-circle"></i> Prepared GST compliance documentation and supported client tax filings.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 </main>
+
+<div class="magnetic-btn" id="magnetic-connect">
+    <span class="magnetic-btn-inner">
+        <i class="fas fa-paper-plane"></i>
+    </span>
+</div>
 
 <footer id="contact" class="dashboard-footer glass-panel">
     <div class="footer-content">
