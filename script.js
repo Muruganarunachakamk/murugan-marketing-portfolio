@@ -221,7 +221,13 @@ if (magneticBtn) {
 
     magneticBtn.addEventListener('click', (e) => {
         if (e.target.closest('.magnetic-popup')) return;
-        window.location.href = 'mailto:muruganarunachalamk@gmail.com?subject=Let%27s%20connect';
+        const email = 'muruganarunachalamk@gmail.com';
+        const subject = encodeURIComponent("Let's connect");
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}`;
+        const win = window.open(gmailUrl, '_blank', 'noopener');
+        if (!win) {
+            window.location.href = `mailto:${email}?subject=${subject}`;
+        }
     });
 }
 
@@ -259,5 +265,72 @@ if (specToggle) {
     specToggle.addEventListener('click', () => {
         const isOpen = specBlock.classList.toggle('is-open');
         specToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+}
+
+
+/* Respect reduced-motion preference for SVG SMIL particle animations */
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.data-particle animateMotion').forEach(anim => {
+        anim.setAttribute('repeatCount', '0');
+    });
+    document.querySelectorAll('.data-particle').forEach(p => p.style.opacity = '0');
+    document.querySelectorAll('.floating-kpi-card animateTransform').forEach(anim => {
+        anim.setAttribute('repeatCount', '0');
+    });
+}
+const revealSections = document.querySelectorAll('.reveal-section');
+if (revealSections.length) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+    revealSections.forEach(section => revealObserver.observe(section));
+}
+
+
+/* Nav active-indicator: highlights the link matching the section in view */
+const navLinks = document.querySelectorAll('.nav-link');
+const navSections = Array.from(navLinks)
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+if (navLinks.length && navSections.length) {
+    const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = '#' + entry.target.id;
+                navLinks.forEach(link => {
+                    link.classList.toggle('is-active', link.getAttribute('href') === id);
+                });
+            }
+        });
+    }, { threshold: 0.4, rootMargin: '-100px 0px -60% 0px' });
+
+    navSections.forEach(section => navObserver.observe(section));
+}
+
+
+/* Download Resume: ripple click feedback + brief loading state */
+const resumeBtn = document.getElementById('download-resume');
+if (resumeBtn) {
+    resumeBtn.addEventListener('click', (e) => {
+        const rect = resumeBtn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height);
+        ripple.className = 'ripple';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        resumeBtn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 650);
+
+        resumeBtn.classList.add('is-loading');
+        setTimeout(() => resumeBtn.classList.remove('is-loading'), 900);
     });
 }
