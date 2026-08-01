@@ -247,6 +247,7 @@ if (magneticPopup) {
             magneticPopup.classList.remove('is-visible');
         });
     }
+}
 
 
 /* Specialization hierarchy: expandable parent -> nested child certificates */
