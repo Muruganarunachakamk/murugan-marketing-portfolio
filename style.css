@@ -1492,3 +1492,198 @@ text-align: left;
 justify-content: flex-start;
 }
 }
+
+/* ============================================================
+   Scroll reveal system: fade + slide entrance, staggered children
+   ============================================================ */
+.reveal-section {
+opacity: 0;
+transform: translateY(28px);
+transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+will-change: opacity, transform;
+}
+
+.reveal-section.is-visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+.reveal-child {
+opacity: 0;
+transform: translateY(18px);
+transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+will-change: opacity, transform;
+}
+
+.reveal-section.is-visible .reveal-child {
+opacity: 1;
+transform: translateY(0);
+}
+
+.reveal-section.is-visible .reveal-child:nth-child(1) { transition-delay: 0.05s; }
+.reveal-section.is-visible .reveal-child:nth-child(2) { transition-delay: 0.12s; }
+.reveal-section.is-visible .reveal-child:nth-child(3) { transition-delay: 0.19s; }
+.reveal-section.is-visible .reveal-child:nth-child(4) { transition-delay: 0.26s; }
+.reveal-section.is-visible .reveal-child:nth-child(5) { transition-delay: 0.33s; }
+.reveal-section.is-visible .reveal-child:nth-child(6) { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-section, .reveal-child {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Card hover lift / glass reflection / glow
+   ============================================================ */
+.glass-card, .cert-card, .interactive-card, .project-card, .spec-child-content {
+transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+will-change: transform;
+}
+
+.glass-card:hover, .cert-card:hover, .interactive-card:hover, .project-card:hover {
+transform: translateY(-6px);
+box-shadow: 0 16px 40px -12px rgba(0,0,0,0.35);
+}
+
+.stat-card {
+transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stat-card:hover {
+transform: translateY(-4px);
+}
+
+/* Soft glass reflection sweep on hover */
+.glass-card, .cert-card, .stat-card {
+position: relative;
+overflow: hidden;
+}
+
+.glass-card::after, .cert-card::after, .stat-card::after {
+content: '';
+position: absolute;
+top: 0;
+left: -60%;
+width: 40%;
+height: 100%;
+background: linear-gradient(115deg, transparent, rgba(255,255,255,0.06), transparent);
+transform: skewX(-15deg);
+transition: left 0.65s ease;
+pointer-events: none;
+}
+
+.glass-card:hover::after, .cert-card:hover::after, .stat-card:hover::after {
+left: 130%;
+}
+
+/* ============================================================
+   Nav active-indicator + underline
+   ============================================================ */
+.nav-links a {
+position: relative;
+}
+
+.nav-links a::after {
+content: '';
+position: absolute;
+left: 0;
+bottom: -4px;
+width: 0;
+height: 2px;
+background: linear-gradient(90deg, var(--accent-blue), var(--accent-secondary));
+transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+border-radius: 2px;
+}
+
+.nav-links a:hover::after,
+.nav-links a.is-active::after {
+width: 100%;
+}
+
+.nav-links a.is-active {
+color: var(--text-main);
+}
+
+/* ============================================================
+   Download Resume button: glow, ripple, animated arrow
+   ============================================================ */
+#download-resume {
+position: relative;
+overflow: hidden;
+}
+
+#download-resume i {
+transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#download-resume:hover i {
+transform: translateY(3px);
+}
+
+#download-resume::before {
+content: '';
+position: absolute;
+inset: -2px;
+border-radius: 10px;
+background: linear-gradient(135deg, var(--accent-blue), var(--accent-secondary));
+opacity: 0;
+filter: blur(10px);
+z-index: -1;
+transition: opacity 0.35s ease;
+}
+
+#download-resume:hover::before {
+opacity: 0.55;
+}
+
+.ripple {
+position: absolute;
+border-radius: 50%;
+background: rgba(255,255,255,0.5);
+transform: scale(0);
+animation: rippleAnim 0.6s ease-out;
+pointer-events: none;
+}
+
+@keyframes rippleAnim {
+to { transform: scale(3); opacity: 0; }
+}
+
+#download-resume.is-loading {
+pointer-events: none;
+}
+
+#download-resume.is-loading i {
+animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+to { transform: rotate(360deg); }
+}
+
+/* ============================================================
+   Floating breathing animation for stat cards & KPI motifs
+   ============================================================ */
+@keyframes floatY {
+0%, 100% { transform: translateY(0); }
+50% { transform: translateY(-6px); }
+}
+
+.stat-card:nth-child(1) { animation: floatY 6s ease-in-out infinite; }
+.stat-card:nth-child(2) { animation: floatY 6s ease-in-out infinite -2s; }
+.stat-card:nth-child(3) { animation: floatY 6s ease-in-out infinite -4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-card { animation: none; }
+}
+
+/* Data particle traveling along flow paths (hero + section illustrations) */
+.data-particle {
+animation: travelPath 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .data-particle { animation: none; opacity: 0; }
+}
