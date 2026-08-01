@@ -69,11 +69,11 @@
             <span class="logo-text">MAK<span class="dot">.</span></span>
         </div>
         <ul class="nav-links">
-            <li><a href="#education">Education</a></li>
-            <li><a href="#projects">Research</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education" class="nav-link">Education</a></li>
+            <li><a href="#projects" class="nav-link">Research</a></li>
+            <li><a href="#certifications" class="nav-link">Certifications</a></li>
+            <li><a href="#skills" class="nav-link">Skills</a></li>
+            <li><a href="#experience" class="nav-link">Experience</a></li>
         </ul>
         <div class="nav-actions">
             <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">
@@ -114,11 +114,28 @@
 
             <g mask="url(#fadeMask)">
                 <!-- connective pathways: customer journey / data pipeline -->
-                <path class="flow-path" d="M 470 90 C 560 60, 640 120, 700 100 S 820 60, 860 130" stroke="url(#lineGrad)" stroke-width="1.6" fill="none" stroke-dasharray="5 7" opacity="0.55"/>
-                <path class="flow-path flow-path-delay" d="M 500 260 C 590 240, 650 300, 730 280 S 840 320, 860 380" stroke="url(#lineGrad)" stroke-width="1.6" fill="none" stroke-dasharray="5 7" opacity="0.5"/>
-                <path class="flow-path" d="M 480 420 C 560 440, 620 400, 700 440 S 800 480, 850 460" stroke="url(#lineGrad)" stroke-width="1.6" fill="none" stroke-dasharray="5 7" opacity="0.45"/>
+                <path id="flowPath1" class="flow-path" d="M 470 90 C 560 60, 640 120, 700 100 S 820 60, 860 130" stroke="url(#lineGrad)" stroke-width="1.6" fill="none" stroke-dasharray="5 7" opacity="0.55"/>
+                <path id="flowPath2" class="flow-path flow-path-delay" d="M 500 260 C 590 240, 650 300, 730 280 S 840 320, 860 380" stroke="url(#lineGrad)" stroke-width="1.6" fill="none" stroke-dasharray="5 7" opacity="0.5"/>
+                <path id="flowPath3" class="flow-path" d="M 480 420 C 560 440, 620 400, 700 440 S 800 480, 850 460" stroke="url(#lineGrad)" stroke-width="1.6" fill="none" stroke-dasharray="5 7" opacity="0.45"/>
                 <path d="M 560 170 C 600 220, 640 210, 660 260" stroke="var(--accent-light)" stroke-width="1.2" fill="none" stroke-dasharray="3 6" opacity="0.4"/>
                 <path d="M 700 300 C 720 340, 700 380, 730 420" stroke="var(--accent-light)" stroke-width="1.2" fill="none" stroke-dasharray="3 6" opacity="0.4"/>
+
+                <!-- travelling data particles along the connection paths -->
+                <circle class="data-particle" r="3" fill="var(--accent-light)" opacity="0.85">
+                    <animateMotion dur="5.5s" repeatCount="indefinite" rotate="auto">
+                        <mpath href="#flowPath1"/>
+                    </animateMotion>
+                </circle>
+                <circle class="data-particle" r="2.6" fill="var(--accent-secondary)" opacity="0.8">
+                    <animateMotion dur="6.5s" repeatCount="indefinite" begin="-2s">
+                        <mpath href="#flowPath2"/>
+                    </animateMotion>
+                </circle>
+                <circle class="data-particle" r="2.4" fill="var(--accent-blue)" opacity="0.75">
+                    <animateMotion dur="7s" repeatCount="indefinite" begin="-4s">
+                        <mpath href="#flowPath3"/>
+                    </animateMotion>
+                </circle>
 
                 <!-- orbit rings: brand positioning -->
                 <circle cx="790" cy="200" r="46" fill="none" stroke="var(--accent-blue)" stroke-width="1.4" opacity="0.5"/>
@@ -155,7 +172,8 @@
                 </g>
 
                 <!-- KPI / marketing mix card -->
-                <g transform="translate(560,400)" opacity="0.95">
+                <g class="floating-kpi-card" opacity="0.95">
+                    <animateTransform attributeName="transform" type="translate" values="560,400; 560,392; 560,400" dur="5s" repeatCount="indefinite"/>
                     <rect x="-20" y="-10" width="180" height="120" rx="12" fill="var(--bg-secondary)" stroke="var(--accent-light)" stroke-width="1" opacity="0.65"/>
                     <text x="0" y="16" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="var(--accent-light)" letter-spacing="1">MARKETING MIX</text>
                     <text x="0" y="40" font-family="Inter, sans-serif" font-size="11" fill="var(--text-muted)">Product</text>
@@ -229,7 +247,7 @@
 
     <div class="grid-layout-2col">
 
-        <section id="education" class="dashboard-section glass-panel">
+        <section id="education" class="dashboard-section glass-panel reveal-section">
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <!-- knowledge network / mind map -->
@@ -296,7 +314,7 @@
             </div>
         </section>
 
-        <section id="skills" class="dashboard-section glass-panel">
+        <section id="skills" class="dashboard-section glass-panel reveal-section">
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <!-- connected skill graph: central hub with tool nodes -->
@@ -397,7 +415,7 @@
         </section>
     </div>
 
-    <section id="projects" class="dashboard-section glass-panel">
+    <section id="projects" class="dashboard-section glass-panel reveal-section">
         <div class="section-illustration" aria-hidden="true">
             <svg viewBox="0 0 1400 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <!-- scatter plot with regression line -->
@@ -452,7 +470,7 @@
         </div>
         <div class="projects-grid">
 
-            <div class="project-card glass-card glow-effect">
+            <div class="project-card glass-card glow-effect reveal-child">
                 <div class="project-category">UG Dissertation</div>
                 <h3 class="project-title">The Role of Advertisement Media on Consumer Buying Behaviour</h3>
                 <div class="project-tools">
@@ -468,7 +486,7 @@
                 </ul>
             </div>
 
-            <div class="project-card glass-card glow-effect">
+            <div class="project-card glass-card glow-effect reveal-child">
                 <div class="project-category">Business Research Project - MBA, 2026</div>
                 <h3 class="project-title">Anthropomorphic Chatbots & Consumer Skepticism Toward AI-Based Customer Support</h3>
                 <div class="project-tools">
@@ -488,7 +506,7 @@
 
     <div class="grid-layout-3col">
 
-        <section id="certifications" class="dashboard-section glass-panel cert-section-full">
+        <section id="certifications" class="dashboard-section glass-panel cert-section-full reveal-section">
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 1400 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <!-- achievement tree -->
@@ -537,7 +555,7 @@
 
             <div class="cert-grid">
 
-                <div class="cert-card">
+                <div class="cert-card reveal-child">
                     <div class="cert-card-top">
                         <div class="cert-org-badge">HubSpot Academy</div>
                         <span class="cert-verify-badge"><i class="fas fa-check-circle"></i> Verified</span>
@@ -558,7 +576,7 @@
                     </div>
                 </div>
 
-                <div class="cert-card">
+                <div class="cert-card reveal-child">
                     <div class="cert-card-top">
                         <div class="cert-org-badge">Microsoft</div>
                         <span class="cert-verify-badge"><i class="fas fa-check-circle"></i> Verified</span>
@@ -579,7 +597,7 @@
                     </div>
                 </div>
 
-                <div class="cert-card">
+                <div class="cert-card reveal-child">
                     <div class="cert-card-top">
                         <div class="cert-org-badge">NPTEL / IIT</div>
                         <span class="cert-verify-badge"><i class="fas fa-check-circle"></i> Verified</span>
@@ -597,7 +615,7 @@
                     </div>
                 </div>
 
-                <div class="cert-card">
+                <div class="cert-card reveal-child">
                     <div class="cert-card-top">
                         <div class="cert-org-badge">NPTEL / IIT</div>
                         <span class="cert-verify-badge"><i class="fas fa-check-circle"></i> Verified</span>
@@ -704,7 +722,7 @@
             </div>
         </section>
 
-        <section id="leadership" class="dashboard-section glass-panel">
+        <section id="leadership" class="dashboard-section glass-panel reveal-section">
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <!-- roadmap path with milestone nodes -->
@@ -740,7 +758,7 @@
             </div>
         </section>
 
-        <section id="achievements-misc" class="dashboard-section glass-panel flex-col">
+        <section id="achievements-misc" class="dashboard-section glass-panel flex-col reveal-section">
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <g stroke="var(--accent-blue)" stroke-width="1" opacity="0.35">
@@ -787,7 +805,7 @@
         </section>
     </div>
 
-    <section id="experience" class="dashboard-section glass-panel">
+    <section id="experience" class="dashboard-section glass-panel reveal-section">
         <div class="section-illustration" aria-hidden="true">
             <svg viewBox="0 0 1400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <!-- process flow: linear workflow with stage boxes -->
@@ -820,7 +838,7 @@
         </div>
         <p class="section-subtext">Early finance internships that built the analytical foundation behind my marketing research.</p>
         <div class="experience-grid">
-            <div class="interactive-card glass-card">
+            <div class="interactive-card glass-card reveal-child">
                 <div class="exp-header">
                     <div class="exp-title-group">
                         <h3>Finance Intern</h3>
@@ -833,7 +851,7 @@
                     <li><i class="fas fa-circle"></i> Reconciled ERP-Tally transactions, gaining working exposure to ERP workflows and export documentation.</li>
                 </ul>
             </div>
-            <div class="interactive-card glass-card">
+            <div class="interactive-card glass-card reveal-child">
                 <div class="exp-header">
                     <div class="exp-title-group">
                         <h3>Audit Intern</h3>
