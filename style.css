@@ -248,13 +248,13 @@ gap: 0.5rem;
 background: var(--accent-blue);
 color: white;
 border: none;
-box-shadow: 0 4px 14px 0 rgba(236, 72, 153, 0.39);
+box-shadow: 0 4px 16px var(--accent-glow);
 }
 
 .btn-primary:hover {
 background: var(--accent-light);
 transform: translateY(-2px);
-box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+box-shadow: 0 6px 22px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.12);
 }
 
 .btn-outline {
@@ -1343,12 +1343,12 @@ border-radius: 50%;
 background: linear-gradient(135deg, var(--accent-blue), var(--accent-secondary));
 color: white;
 font-size: 1.15rem;
-box-shadow: 0 6px 18px rgba(236, 72, 153, 0.32);
+box-shadow: 0 6px 18px var(--accent-glow);
 transition: transform 0.15s ease-out, box-shadow 0.3s ease;
 }
 
 .magnetic-btn:hover .magnetic-btn-inner {
-box-shadow: 0 8px 24px rgba(236, 72, 153, 0.45);
+box-shadow: 0 8px 22px var(--accent-glow);
 }
 
 .magnetic-btn:active .magnetic-btn-inner {
@@ -1686,4 +1686,161 @@ animation: travelPath 6s linear infinite;
 
 @media (prefers-reduced-motion: reduce) {
   .data-particle { animation: none; opacity: 0; }
+}
+
+/* ============================================================
+   Marketing Concepts Universe: floating glass nodes + info card
+   ============================================================ */
+.concept-layer {
+position: absolute;
+inset: 0;
+z-index: 2;
+pointer-events: none;
+}
+
+.concept-node {
+position: absolute;
+width: 46px;
+height: 46px;
+border-radius: 50%;
+background: var(--glass-bg);
+backdrop-filter: blur(6px);
+-webkit-backdrop-filter: blur(6px);
+border: 1px solid var(--glass-border);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.62rem;
+font-weight: 700;
+letter-spacing: 0.3px;
+color: var(--accent-light);
+cursor: pointer;
+pointer-events: auto;
+box-shadow: 0 4px 18px rgba(0,0,0,0.1), inset 0 0 12px rgba(255,255,255,0.04);
+transition: box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+touch-action: none;
+user-select: none;
+animation: nodeFloat 7s ease-in-out infinite;
+will-change: transform;
+text-align: center;
+line-height: 1.1;
+padding: 2px;
+}
+
+.concept-node:hover, .concept-node.is-active {
+box-shadow: 0 6px 22px rgba(0,0,0,0.14), 0 0 18px var(--accent-glow);
+border-color: var(--accent-light);
+}
+
+.concept-node.is-dragging {
+animation-play-state: paused;
+cursor: grabbing;
+transition: none;
+}
+
+@keyframes nodeFloat {
+0%, 100% { margin-top: 0; }
+50% { margin-top: -8px; }
+}
+
+@media (max-width: 900px) {
+  .concept-layer { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .concept-node { animation: none; }
+}
+
+/* Shared expandable concept card */
+.concept-card {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) scale(0.92);
+width: min(360px, 88vw);
+background: var(--bg-secondary);
+border: 1px solid var(--glass-border);
+border-radius: 16px;
+padding: 1.6rem;
+box-shadow: 0 24px 56px rgba(0,0,0,0.28);
+z-index: 2000;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.concept-card.is-open {
+opacity: 1;
+transform: translate(-50%, -50%) scale(1);
+pointer-events: auto;
+}
+
+.concept-card-backdrop {
+position: fixed;
+inset: 0;
+background: rgba(0,0,0,0.3);
+backdrop-filter: blur(2px);
+z-index: 1999;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+}
+
+.concept-card-backdrop.is-open {
+opacity: 1;
+pointer-events: auto;
+}
+
+.concept-card-close {
+position: absolute;
+top: 12px;
+right: 14px;
+background: none;
+border: none;
+color: var(--text-muted);
+font-size: 1.3rem;
+cursor: pointer;
+line-height: 1;
+}
+
+.concept-card-close:hover {
+color: var(--text-main);
+}
+
+.concept-card-icon {
+width: 46px;
+height: 46px;
+border-radius: 12px;
+background: linear-gradient(135deg, var(--accent-blue), var(--accent-secondary));
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 1.2rem;
+margin-bottom: 1rem;
+box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.concept-card-title {
+font-size: 1.15rem;
+font-weight: 700;
+color: var(--text-main);
+margin-bottom: 0.6rem;
+}
+
+.concept-card-desc {
+font-size: 0.9rem;
+color: var(--text-muted);
+line-height: 1.6;
+margin-bottom: 1rem;
+}
+
+.concept-card-viz {
+width: 100%;
+height: 70px;
+}
+
+.concept-card-viz svg {
+width: 100%;
+height: 100%;
 }
