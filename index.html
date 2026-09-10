@@ -90,6 +90,7 @@
 <main class="dashboard-container">
 
     <section id="hero" class="dashboard-section hero-section glass-panel">
+        <div class="concept-layer" data-section="hero"></div>
 
         <svg class="hero-illustration" viewBox="0 0 900 640" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
@@ -248,6 +249,7 @@
     <div class="grid-layout-2col">
 
         <section id="education" class="dashboard-section glass-panel reveal-section">
+            <div class="concept-layer" data-section="education"></div>
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <!-- knowledge network / mind map -->
@@ -315,6 +317,7 @@
         </section>
 
         <section id="skills" class="dashboard-section glass-panel reveal-section">
+            <div class="concept-layer" data-section="skills"></div>
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <!-- connected skill graph: central hub with tool nodes -->
@@ -416,6 +419,7 @@
     </div>
 
     <section id="projects" class="dashboard-section glass-panel reveal-section">
+            <div class="concept-layer" data-section="projects"></div>
         <div class="section-illustration" aria-hidden="true">
             <svg viewBox="0 0 1400 420" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <!-- scatter plot with regression line -->
@@ -507,6 +511,7 @@
     <div class="grid-layout-3col">
 
         <section id="certifications" class="dashboard-section glass-panel cert-section-full reveal-section">
+            <div class="concept-layer" data-section="certifications"></div>
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 1400 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <!-- achievement tree -->
@@ -723,6 +728,7 @@
         </section>
 
         <section id="leadership" class="dashboard-section glass-panel reveal-section">
+            <div class="concept-layer" data-section="leadership"></div>
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 700 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <!-- roadmap path with milestone nodes -->
@@ -759,6 +765,7 @@
         </section>
 
         <section id="achievements-misc" class="dashboard-section glass-panel flex-col reveal-section">
+            <div class="concept-layer" data-section="achievements-misc"></div>
             <div class="section-illustration" aria-hidden="true">
                 <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                     <g stroke="var(--accent-blue)" stroke-width="1" opacity="0.35">
@@ -806,6 +813,7 @@
     </div>
 
     <section id="experience" class="dashboard-section glass-panel reveal-section">
+            <div class="concept-layer" data-section="experience"></div>
         <div class="section-illustration" aria-hidden="true">
             <svg viewBox="0 0 1400 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <!-- process flow: linear workflow with stage boxes -->
@@ -914,6 +922,15 @@
         <p>&copy; 2026 Murugan Arunachalam K. Built for Brand & Consumer Insight.</p>
     </div>
 </footer>
+
+<div class="concept-card" id="concept-card" role="dialog" aria-hidden="true">
+    <button class="concept-card-close" id="concept-card-close" aria-label="Close">&times;</button>
+    <div class="concept-card-icon" id="concept-card-icon"></div>
+    <h4 class="concept-card-title" id="concept-card-title"></h4>
+    <p class="concept-card-desc" id="concept-card-desc"></p>
+    <div class="concept-card-viz" id="concept-card-viz"></div>
+</div>
+<div class="concept-card-backdrop" id="concept-card-backdrop"></div>
 
 <script src="script.js"></script>
 </body>
