@@ -42,21 +42,9 @@
   --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0e1116;
-    --bg-elevated: #171b22;
-    --text: #eef1f5;
-    --text-soft: #9aa3b2;
-    --border: rgba(255, 255, 255, 0.09);
-    --accent: #22d3ee;
-    --accent-2: #a78bfa;
-    --accent-soft: rgba(34, 211, 238, 0.10);
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-    --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.5);
-  }
-}
+/* Dark mode is opt-in only via the theme toggle (data-theme="dark").
+   Deliberately NOT keying off prefers-color-scheme: the brief requires
+   light mode as the unconditional first-visit default. */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -445,19 +433,41 @@ img, svg { display: block; max-width: 100%; }
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-bottom: 2rem;
+  counter-reset: cert-index;
 }
 
 .cert-card {
+  position: relative;
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  counter-increment: cert-index;
+  overflow: hidden;
+}
+.cert-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0.7;
+}
+.cert-card::after {
+  content: counter(cert-index, decimal-leading-zero);
+  position: absolute;
+  top: 1.1rem;
+  right: 1.3rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--border);
 }
 .cert-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 
-.cert-card-top { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
+.cert-card-top { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.6rem; padding-right: 2rem; }
 
 .cert-issuer {
   font-size: 0.75rem;
@@ -618,24 +628,14 @@ img, svg { display: block; max-width: 100%; }
 /* ============================================================
    Experience
    ============================================================ */
-.experience-list { display: flex; flex-direction: column; gap: 1.25rem; }
-
-.experience-card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1.75rem;
-  box-shadow: var(--shadow-sm);
-}
-
 .experience-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
 .experience-card-top h3 { font-size: 1.05rem; }
 .experience-org { font-size: 0.88rem; color: var(--accent-2); font-weight: 600; margin-top: 0.15rem; }
 .experience-date { font-size: 0.8rem; color: var(--text-soft); background: var(--bg); border: 1px solid var(--border); padding: 0.3rem 0.75rem; border-radius: 20px; }
 
-.experience-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-.experience-card li { font-size: 0.9rem; color: var(--text-soft); padding-left: 1rem; position: relative; }
-.experience-card li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+.timeline-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.timeline-card li { font-size: 0.9rem; color: var(--text-soft); padding-left: 1rem; position: relative; }
+.timeline-card li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
 
 /* ============================================================
    Leadership + Achievements
@@ -683,7 +683,7 @@ img, svg { display: block; max-width: 100%; }
   gap: 2rem;
 }
 
-.footer-main h2 { font-size: 1.6rem; margin-bottom: 0.6rem; }
+.footer-main h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; letter-spacing: -0.01em; margin-bottom: 0.8rem; }
 .footer-main p { color: var(--text-soft); margin-bottom: 1.4rem; }
 
 .footer-contact-list { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -756,4 +756,226 @@ img, svg { display: block; max-width: 100%; }
   .footer-inner { flex-direction: column; }
   .footer-meta { text-align: left; }
   .specialization-summary { flex-direction: column; }
+}
+
+/* ============================================================
+   Signature interaction: Marketing Journey progress thread
+   Consumer -> Research -> Insight -> Strategy -> Impact
+   ============================================================ */
+.journey-thread {
+  position: fixed;
+  left: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 850;
+  display: flex;
+  align-items: center;
+}
+
+.journey-thread ol {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.journey-line {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.journey-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  border-radius: 2px;
+  transition: height 0.2s linear;
+}
+
+.journey-thread li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  cursor: default;
+}
+
+.journey-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border);
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
+  flex-shrink: 0;
+}
+
+.journey-thread li.is-active .journey-dot {
+  border-color: var(--accent);
+  background: var(--accent);
+  transform: scale(1.25);
+}
+
+.journey-label {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), color var(--dur) var(--ease);
+  white-space: nowrap;
+}
+
+.journey-thread:hover .journey-label,
+.journey-thread li.is-active .journey-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.journey-thread li.is-active .journey-label { color: var(--accent-2); }
+
+@media (max-width: 1180px) {
+  .journey-thread { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-fill { transition: none; }
+  .journey-dot, .journey-label { transition: none; }
+}
+
+/* Capability ecosystem: subtle connector web behind the cluster grid */
+.capability-ecosystem { position: relative; }
+
+.capability-connectors {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.capability-grid { position: relative; z-index: 1; }
+
+@media (max-width: 980px) {
+  .capability-connectors { display: none; }
+}
+
+/* Experience: storyline timeline */
+.timeline { position: relative; display: flex; flex-direction: column; gap: 2.5rem; padding-left: 2.2rem; }
+
+.timeline-rail {
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--border);
+}
+
+.timeline-item { position: relative; }
+
+.timeline-marker {
+  position: absolute;
+  left: -2.2rem;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+.timeline-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.timeline-card:hover { transform: translateX(4px); box-shadow: var(--shadow-md); }
+
+/* ============================================================
+   Creative Interactive Guide — minimal line-art figure appearing
+   at 2-3 strategic points. Idle by default; reacts to cursor
+   proximity and hover on a designated nearby target only.
+   ============================================================ */
+.guide-mount {
+  position: relative;
+  width: 46px;
+  height: 56px;
+  display: inline-block;
+  pointer-events: none;
+}
+
+.guide-figure {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 46px;
+  height: 56px;
+  pointer-events: none;
+}
+
+.guide-figure svg { width: 100%; height: 100%; }
+
+.guide-figure .guide-body-group {
+  transform-origin: 50% 90%;
+  animation: guideBreathe 4.2s ease-in-out infinite;
+}
+
+@keyframes guideBreathe {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.5px); }
+}
+
+.guide-figure .guide-arm {
+  transform-origin: 60% 20%;
+  transition: transform 0.5s var(--ease);
+}
+
+/* Approach: figure notices the cursor nearby — slight lean */
+.guide-figure.is-noticing .guide-body-group {
+  animation-play-state: paused;
+  transition: transform 0.4s var(--ease);
+  transform: translateX(1px);
+}
+
+/* Hover: point toward the associated target */
+.guide-figure.is-pointing .guide-arm {
+  transform: rotate(-32deg) translate(-1px, -2px);
+}
+
+/* Click: small nod/gesture pulse */
+.guide-figure.is-clicked .guide-body-group {
+  animation: guideNod 0.4s var(--ease);
+}
+@keyframes guideNod {
+  0% { transform: translateY(0) rotate(0deg); }
+  40% { transform: translateY(1px) rotate(-2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+@media (max-width: 900px) {
+  /* Simplify: static idle only, no cursor-follow (no cursor on touch) */
+  .guide-figure .guide-body-group { animation: guideBreathe 5.5s ease-in-out infinite; }
+  .guide-figure.is-noticing .guide-body-group,
+  .guide-figure.is-pointing .guide-arm { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-figure .guide-body-group,
+  .guide-figure .guide-arm { animation: none !important; transition: none !important; transform: none !important; }
 }
