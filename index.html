@@ -9,10 +9,34 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
+<script>
+  // Runs before paint to avoid a flash of the wrong theme.
+  // Light mode is the unconditional default; dark only applies if
+  // the visitor explicitly chose it on a previous visit.
+  (function () {
+    try {
+      var saved = localStorage.getItem('mak-theme-preference');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    } catch (e) { /* storage unavailable: stay on light default */ }
+  })();
+</script>
 </head>
 <body>
 
 <a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- Signature interaction: Marketing Journey — a scroll-linked thread from
+     Consumer through to Impact, tracking progress through the page. -->
+<nav class="journey-thread" id="journey-thread" aria-label="Page progress: marketing journey">
+    <div class="journey-line" aria-hidden="true"><div class="journey-fill" id="journey-fill"></div></div>
+    <ol>
+        <li data-journey="consumer"><span class="journey-dot" aria-hidden="true"></span><span class="journey-label">Consumer</span></li>
+        <li data-journey="research"><span class="journey-dot" aria-hidden="true"></span><span class="journey-label">Research</span></li>
+        <li data-journey="insight"><span class="journey-dot" aria-hidden="true"></span><span class="journey-label">Insight</span></li>
+        <li data-journey="strategy"><span class="journey-dot" aria-hidden="true"></span><span class="journey-label">Strategy</span></li>
+        <li data-journey="impact"><span class="journey-dot" aria-hidden="true"></span><span class="journey-label">Impact</span></li>
+    </ol>
+</nav>
 
 <header class="site-header">
     <nav class="nav" aria-label="Primary">
@@ -44,7 +68,7 @@
 
 <main id="main-content">
 
-    <section id="top" class="hero">
+    <section id="top" class="hero" data-journey-stage="consumer">
         <div class="hero-bg" aria-hidden="true">
             <svg viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -100,16 +124,17 @@
                 MBA Marketing candidate with experience across consumer research, segmentation, positioning, digital marketing, and stakeholder outreach — with a strong analytical foundation in finance and business research.
             </p>
             <div class="hero-actions">
-                <a href="#work" class="btn btn-primary magnetic">View My Work</a>
+                <a href="#work" class="btn btn-primary magnetic" id="hero-work-btn">View My Work</a>
                 <a href="#" id="hero-resume-btn" class="btn btn-secondary magnetic">Download Resume</a>
                 <a href="https://www.linkedin.com/in/murugan2606/" target="_blank" rel="noopener noreferrer" class="btn btn-icon magnetic" aria-label="LinkedIn profile (opens in new tab)">
                     <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                 </a>
+                <div class="guide-mount" id="guide-mount-hero" aria-hidden="true"></div>
             </div>
         </div>
     </section>
 
-    <section id="work" class="section reveal">
+    <section id="work" class="section reveal" data-journey-stage="insight">
         <div class="section-head">
             <p class="eyebrow">Featured Work</p>
             <h2>Flagship Case Study</h2>
@@ -140,7 +165,7 @@
         </div>
     </section>
 
-    <section id="research" class="section reveal">
+    <section id="research" class="section reveal" data-journey-stage="research">
         <div class="section-head">
             <p class="eyebrow">Academic Research</p>
             <h2>Research Case Studies</h2>
@@ -173,7 +198,7 @@
         </div>
     </section>
 
-    <section id="certifications" class="section reveal">
+    <section id="certifications" class="section reveal" data-journey-stage="insight">
         <div class="section-head">
             <p class="eyebrow">Credentials</p>
             <h2>Certifications</h2>
@@ -253,12 +278,13 @@
                     <p class="spec-desc">A 4-course specialization covering generative AI fundamentals, prompt engineering, applied GenAI for digital marketing, and Generative Engine Optimization (GEO) for AI-driven search visibility.</p>
                 </div>
                 <div class="specialization-actions">
-                    <a href="https://www.coursera.org/account/accomplishments/specialization/HCMYUYBKZ9OO" target="_blank" rel="noopener noreferrer" aria-label="Verify Generative AI for Digital Marketing specialization (opens in new tab)">Verify Credential</a>
+                    <a href="https://www.coursera.org/account/accomplishments/specialization/HCMYUYBKZ9OO" target="_blank" rel="noopener noreferrer" aria-label="Verify Generative AI for Digital Marketing specialization (opens in new tab)" id="cert-verify-link">Verify Credential</a>
                     <a href="https://raw.githubusercontent.com/Muruganarunachakamk/murugan-marketing-portfolio/e7ccc14f8edce17c0ef232c0c6703d5b55bc506a/Coursera%20Specialisation.pdf" target="_blank" rel="noopener noreferrer" aria-label="View specialization certificate (opens in new tab)">View Certificate</a>
                     <button type="button" class="spec-toggle" id="spec-toggle" aria-expanded="false" aria-controls="spec-courses">
                         <span>Show 4 courses</span>
                         <i class="fas fa-chevron-down" aria-hidden="true"></i>
                     </button>
+                    <div class="guide-mount" id="guide-mount-cert" aria-hidden="true"></div>
                 </div>
             </div>
 
@@ -303,13 +329,21 @@
         </div>
     </section>
 
-    <section id="capabilities" class="section reveal">
+    <section id="capabilities" class="section reveal" data-journey-stage="strategy">
         <div class="section-head">
             <p class="eyebrow">Capabilities</p>
             <h2>Marketing Capabilities</h2>
         </div>
 
-        <div class="capability-grid">
+        <div class="capability-ecosystem">
+            <svg class="capability-connectors" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="50" y1="50" x2="18" y2="18" stroke="var(--border)" stroke-width="0.3"/>
+                <line x1="50" y1="50" x2="82" y2="18" stroke="var(--border)" stroke-width="0.3"/>
+                <line x1="50" y1="50" x2="18" y2="82" stroke="var(--border)" stroke-width="0.3"/>
+                <line x1="50" y1="50" x2="82" y2="82" stroke="var(--border)" stroke-width="0.3"/>
+                <circle cx="50" cy="50" r="1.4" fill="var(--accent)"/>
+            </svg>
+            <div class="capability-grid">
             <div class="capability-cluster reveal-child">
                 <h3><i class="fas fa-users" aria-hidden="true"></i> Consumer &amp; Market Insight</h3>
                 <ul>
@@ -353,17 +387,22 @@
                     <li>Problem Solving</li>
                 </ul>
             </div>
+            </div>
         </div>
     </section>
 
-    <section id="experience" class="section reveal">
+    <section id="experience" class="section reveal" data-journey-stage="strategy">
         <div class="section-head">
             <p class="eyebrow">Experience</p>
             <h2>Analytical &amp; Operational Foundation</h2>
         </div>
 
-        <div class="experience-list">
-            <article class="experience-card reveal-child">
+        <div class="timeline">
+            <div class="timeline-rail" aria-hidden="true"></div>
+
+            <article class="timeline-item reveal-child">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-card">
                 <div class="experience-card-top">
                     <div>
                         <h3>Finance Intern</h3>
@@ -376,9 +415,12 @@
                     <li>Reconciled ERP-Tally transactions, gaining working exposure to ERP workflows, inventory processes, and export documentation.</li>
                     <li>Collaborated with client-facing teams during audit and compliance activities.</li>
                 </ul>
+                </div>
             </article>
 
-            <article class="experience-card reveal-child">
+            <article class="timeline-item reveal-child">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-card">
                 <div class="experience-card-top">
                     <div>
                         <h3>Audit Intern</h3>
@@ -390,6 +432,7 @@
                     <li>Assisted with bank reconciliation and accounting entries as part of statutory audit engagements.</li>
                     <li>Prepared GST compliance documentation and supported client tax filings.</li>
                 </ul>
+                </div>
             </article>
         </div>
     </section>
@@ -431,30 +474,55 @@
         </div>
     </section>
 
-    <section id="about" class="section reveal">
-        <div class="section-head">
-            <p class="eyebrow">About</p>
-            <h2>Professional Profile</h2>
-        </div>
-        <div class="about-content reveal-child">
-            <p>I'm an MBA Marketing candidate at Amrita School of Business, working at the intersection of consumer research and business strategy. My academic work centers on understanding how advertising media and digital touchpoints shape consumer decision-making — most recently through a primary survey study on advertising media effects, and current research on consumer trust in AI-based customer support.</p>
-            <p>My analytical foundation was built during a B.Com in Accounting &amp; Finance and internships in audit and financial reconciliation, which grounded my approach to research in rigor and evidence rather than assumption. I bring that same discipline to marketing problems: segmenting audiences, testing hypotheses, and translating data into positioning and communication decisions.</p>
-            <p>Alongside coursework, I represent my institution through the Public Relations Committee, coordinating outreach and event promotion across student and external stakeholder groups — building the communication and relationship-management skills that sit alongside analytical capability in marketing work.</p>
+    <section id="about" class="section about-section reveal">
+        <div class="about-split">
+            <div class="about-narrative">
+                <p class="eyebrow">About</p>
+                <h2>How I think about marketing</h2>
+                <div class="about-content reveal-child">
+                    <p>I'm an MBA Marketing candidate at Amrita School of Business, working at the intersection of consumer research and business strategy. My academic work centers on understanding how advertising media and digital touchpoints shape consumer decision-making — most recently through a primary survey study on advertising media effects, and current research on consumer trust in AI-based customer support.</p>
+                    <p>My analytical foundation was built during a B.Com in Accounting &amp; Finance and internships in audit and financial reconciliation, which grounded my approach to research in rigor and evidence rather than assumption. I bring that same discipline to marketing problems: segmenting audiences, testing hypotheses, and translating data into positioning and communication decisions.</p>
+                    <p>Alongside coursework, I represent my institution through the Public Relations Committee, coordinating outreach and event promotion across student and external stakeholder groups — building the communication and relationship-management skills that sit alongside analytical capability in marketing work.</p>
+                </div>
+            </div>
+
+            <div class="mindset-diagram reveal-child" aria-hidden="true">
+                <svg viewBox="0 0 360 380" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="180" cy="190" r="150" fill="none" stroke="var(--border)" stroke-width="1"/>
+                    <circle cx="180" cy="190" r="100" fill="none" stroke="var(--border)" stroke-width="1"/>
+                    <g font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="600" fill="var(--text-soft)" text-anchor="middle">
+                        <circle cx="180" cy="40" r="5" fill="var(--accent)"/>
+                        <text x="180" y="24">Evidence</text>
+
+                        <circle cx="310" cy="190" r="5" fill="var(--accent-2)"/>
+                        <text x="318" y="194" text-anchor="start">Empathy</text>
+
+                        <circle cx="180" cy="340" r="5" fill="var(--accent)"/>
+                        <text x="180" y="362">Strategy</text>
+
+                        <circle cx="50" cy="190" r="5" fill="var(--accent-2)"/>
+                        <text x="42" y="194" text-anchor="end">Communication</text>
+                    </g>
+                    <path d="M180 45 L 305 190 L 180 335 L 55 190 Z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="1.2" opacity="0.7"/>
+                    <circle cx="180" cy="190" r="4" fill="var(--accent-2)"/>
+                </svg>
+            </div>
         </div>
     </section>
 
 </main>
 
-<footer id="contact" class="site-footer">
+<footer id="contact" class="site-footer" data-journey-stage="impact">
     <div class="footer-inner">
         <div class="footer-main">
             <h2>Let's talk</h2>
             <p>Open to marketing, research, and brand strategy conversations.</p>
             <div class="footer-contact-list">
-                <a href="mailto:muruganarunachalamk@gmail.com"><i class="fas fa-envelope" aria-hidden="true"></i> muruganarunachalamk@gmail.com</a>
+                <a href="mailto:muruganarunachalamk@gmail.com" id="contact-email-link"><i class="fas fa-envelope" aria-hidden="true"></i> muruganarunachalamk@gmail.com</a>
                 <a href="tel:+918838289429"><i class="fas fa-phone-alt" aria-hidden="true"></i> +91 8838289429</a>
                 <a href="https://www.linkedin.com/in/murugan2606/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in" aria-hidden="true"></i> LinkedIn</a>
             </div>
+            <div class="guide-mount" id="guide-mount-contact" aria-hidden="true"></div>
         </div>
         <div class="footer-meta">
             <p>Coimbatore, Tamil Nadu, India</p>
